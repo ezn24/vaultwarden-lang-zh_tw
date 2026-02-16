@@ -1,20 +1,20 @@
 <main class="container-xl">
     <div id="users-block" class="my-3 p-3 rounded shadow">
-        <h6 class="border-bottom pb-2 mb-3">Registered Users</h6>
+        <h6 class="border-bottom pb-2 mb-3">已註冊使用者</h6>
         <div class="table-responsive-xl small">
             <table id="users-table" class="table table-sm table-striped table-hover">
                 <thead>
                     <tr>
-                        <th class="vw-account-details">User</th>
+                        <th class="vw-account-details" >使用者</th>
                         {{#if sso_enabled}}
-                        <th class="vw-sso-identifier">SSO Identifier</th>
+                        <th class="vw-sso-identifier">SSO 識別碼</th>
                         {{/if}}
-                        <th class="vw-created-at">Created at</th>
-                        <th class="vw-last-active">Last Active</th>
-                        <th class="vw-entries">Entries</th>
-                        <th class="vw-attachments">Attachments</th>
-                        <th class="vw-organizations">Organizations</th>
-                        <th class="vw-actions">Actions</th>
+                        <th class="vw-created-at">建立時間</th>
+                        <th class="vw-last-active">最後活動</th>
+                        <th class="vw-entries">項目</th>
+                        <th class="vw-attachments">附件</th>
+                        <th class="vw-organizations">組織</th>
+                        <th class="vw-actions">操作</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -27,16 +27,16 @@
                                 <span class="d-block">{{email}}</span>
                                 <span class="d-block">
                                     {{#unless user_enabled}}
-                                        <span class="badge bg-danger me-2" title="User is disabled">Disabled</span>
+                                        <span class="badge bg-danger me-2" title="使用者已停用">已停用</span>
                                     {{/unless}}
                                     {{#if twoFactorEnabled}}
-                                        <span class="badge bg-success me-2" title="2FA is enabled">2FA</span>
+                                        <span class="badge bg-success me-2" title="已啟用兩步驟驗證">2FA</span>
                                     {{/if}}
                                     {{#case _status 1}}
-                                        <span class="badge bg-warning text-dark me-2" title="User is invited">Invited</span>
+                                        <span class="badge bg-warning text-dark me-2" title="使用者已受邀">已邀請</span>
                                     {{/case}}
                                     {{#if emailVerified}}
-                                        <span class="badge bg-success me-2" title="Email has been verified">Verified</span>
+                                        <span class="badge bg-success me-2" title="電子郵件已驗證">已驗證</span>
                                     {{/if}}
                                 </span>
                             </div>
@@ -56,9 +56,9 @@
                             <span class="d-block">{{cipher_count}}</span>
                         </td>
                         <td>
-                            <span class="d-block"><strong>Amount:</strong> {{attachment_count}}</span>
+                            <span class="d-block"><strong>數量：</strong> {{attachment_count}}</span>
                             {{#if attachment_count}}
-                            <span class="d-block"><strong>Size:</strong> {{attachment_size}}</span>
+                            <span class="d-block"><strong>大小：</strong> {{attachment_size}}</span>
                             {{/if}}
                         </td>
                         <td>
@@ -71,20 +71,20 @@
                         <td class="text-end px-1 small">
                             <span data-vw-user-uuid="{{id}}" data-vw-user-email="{{email}}">
                                 {{#if twoFactorEnabled}}
-                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-remove2fa>Remove all 2FA</button><br>
+                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-remove2fa>移除全部兩步驟驗證</button><br>
                                 {{/if}}
-                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-deauth-user>Deauthorize sessions</button><br>
-                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-delete-user>Delete User</button><br>
+                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-deauth-user>使工作階段失效</button><br>
+                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-delete-user>刪除使用者</button><br>
                                 {{#if ../sso_enabled}}
-                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-delete-sso-user>Delete SSO Association</button><br>
+                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-delete-sso-user>刪除 SSO 關聯</button><br>
                                 {{/if}}
                                 {{#if user_enabled}}
-                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-disable-user>Disable User</button><br>
+                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-disable-user>停用使用者</button><br>
                                 {{else}}
-                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-enable-user>Enable User</button><br>
+                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-enable-user>啟用使用者</button><br>
                                 {{/if}}
                                 {{#case _status 1}}
-                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-resend-user-invite>Resend invite</button><br>
+                                <button type="button" class="btn btn-sm btn-link p-0 border-0 float-right" vw-resend-user-invite>重新寄送邀請</button><br>
                                 {{/case}}
                             </span>
                         </td>
@@ -96,22 +96,22 @@
 
         <div class="mt-3 clearfix">
             <button type="button" class="btn btn-sm btn-danger" id="updateRevisions"
-                title="Force all clients to fetch new data next time they connect. Useful after restoring a backup to remove any stale data.">
-                Force clients to resync
+                title="強制所有用戶端在下次連線時重新抓取資料。還原備份後可用來清除過期資料。">
+                強制用戶端重新同步
             </button>
 
-            <button type="button" class="btn btn-sm btn-primary float-end" id="reload">Reload users</button>
+            <button type="button" class="btn btn-sm btn-primary float-end" id="reload">重新載入使用者</button>
         </div>
     </div>
 
     <div id="inviteUserFormBlock" class="align-items-center p-3 mb-3 text-white-50 bg-secondary rounded shadow">
         <div>
-            <h6 class="mb-0 text-white">Invite User</h6>
-            <small>Email:</small>
+            <h6 class="mb-0 text-white">邀請使用者</h6>
+            <small>電子郵件：</small>
 
             <form class="form-inline input-group w-50" id="inviteUserForm">
-                <input type="email" class="form-control me-2" id="inviteEmail" placeholder="Enter email" required spellcheck="false">
-                <button type="submit" class="btn btn-primary">Invite</button>
+                <input type="email" class="form-control me-2" id="inviteEmail" placeholder="輸入電子郵件" required spellcheck="false">
+                <button type="submit" class="btn btn-primary">邀請</button>
             </form>
         </div>
     </div>
@@ -121,7 +121,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h6 class="modal-title">
-                        <b>Update User Type:</b><br><b>Organization:</b> <span id="userOrgTypeDialogOrgName"></span><br><b>User:</b> <span id="userOrgTypeDialogUserEmail"></span>
+                        <b>更新使用者類型：</b><br><b>組織：</b> <span id="userOrgTypeDialogOrgName"></span><br><b>使用者：</b> <span id="userOrgTypeDialogUserEmail"></span>
                     </h6>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
@@ -143,8 +143,8 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                        <button type="submit" class="btn btn-sm btn-primary">Change Role</button>
+                        <button type="button" class="btn btn-sm btn-secondary" data-bs-dismiss="modal">取消</button>
+                        <button type="submit" class="btn btn-sm btn-primary">變更角色</button>
                     </div>
                 </form>
             </div>
